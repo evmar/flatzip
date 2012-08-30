@@ -43,6 +43,10 @@ func main() {
 		dst := filepath.Join(dstroot, path)
 
 		if info.IsDir() {
+			base := filepath.Base(path)
+			if base == ".git" || base == ".svn" {
+				return filepath.SkipDir
+			}
 			log.Printf("%s\n", path)
 			check(os.MkdirAll(dst, 0777))
 		} else {
