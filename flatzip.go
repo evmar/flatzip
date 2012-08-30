@@ -50,8 +50,8 @@ func main() {
 			check(err)
 			check(f.Truncate(info.Size()))
 			check(f.Close())
+			check(os.Chtimes(dst, info.ModTime(), info.ModTime()))
 		}
-		check(os.Chtimes(dst, info.ModTime(), info.ModTime()))
 		return nil
 	}
 	check(filepath.Walk(srcroot, visit))
